@@ -28,7 +28,7 @@ if (mysqli_stmt_num_rows($verificar) > 0) {
     mysqli_stmt_fetch($verificar);
     //adiciona"../" para acessar a pasta onde está a imagem
     //verifica se o camiho da imagem é padrao
-    if($img == "img/Fundo_padrao.jpg"){
+    if($img == "Backgraund1.jpg"){
         $img = "../".$img;
     }else{
         $img = "img_troca/".$img;
@@ -42,7 +42,7 @@ if (mysqli_stmt_num_rows($verificar) > 0) {
 }
 
 
-$quant_produtos = 5;
+$quant_produtos = 3;
 include_once("itens/gerente_itens.php");
 
 ?>
@@ -54,111 +54,30 @@ include_once("itens/gerente_itens.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <style>
-        body{
-            background-image: url("../img/Backgraund2.jpg");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-        .siderbar {
-            width: 300px;
-            height: 98%;
-            background-color: rgba(114, 58, 179, 0.59);
-            position: fixed;
-            top: 0;
-            left: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px 0;
-            transition: left 0.5s ease-in-out;
-
-            >h1 {
-                font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-                font-size: 30px;
-                color: #fff;
-                margin-bottom: 20px;
-
-            }
-
-            >.img {
-                width: 150px;
-                height: 150px;
-                border-radius: 50%;
-                overflow: hidden;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-bottom: 20px;
-
-                >img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-            }
-            > .atalhos {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                > a {
-                    width: 100%;
-                    padding: 10px 0;
-                    text-align: center;
-                    color: #fff;
-                    font-size: 20px;
-                    text-decoration: none;
-                    border-bottom: 1px solid #fff;
-                    transition: 0.3s;
-                    &:hover {
-                        background-color: rgba(255, 0, 0, 0.2); /* Red hover color */
-                    }
-                    
-                }
-            }
-            
-        }
-        .conteudo {
-            width: 100%;
-            height: 98%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            color: rgba(216, 55, 83, 0.41);
-            font-size: 30px;
-            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-        }
-
-        .carrossel {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: row; /* Alteração para distribuir os itens horizontalmente */
-        }
-
-        .item {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        .item > img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style>
+    <link type="text/css" rel="stylesheet" href="Style/Home.css"> 
 </head>
 <body>
+    <div class="slide">
+        <div class="titulo">
+            <h1>Produtos</h1>
+        </div>
+            <?php
+            for ($i = 0; $i < $quant_produtos; $i++) {
+                echo "<div class='product'>";
+                echo "<div class='slide_img'><br>";
+                echo "<img src='" . $lista[$i]['imagem'] . "' alt=''>";
+                echo "</div>";
+                echo "<div class='slide_text'><br>";
+                echo "<h1>" . $lista[$i]['nome'] . "</h1>";
+                echo "<p>" . $lista[$i]['descricao'] . "</p>";
+                echo "<h2>" . $lista[$i]['valor'] . "</h2>";
+                echo "<a href='#'>Comprar</a>";
+                echo "</div>";
+                echo "</div>";
+            }
+            ?>
+        </div>
+    </div>
     <div class="siderbar">
         <div class="img">
             <img src="<?php echo $img; ?>" alt="Foto de perfil"><br>
@@ -198,16 +117,6 @@ include_once("itens/gerente_itens.php");
             document.addEventListener('mousemove', esconder);
         });
     </script>
-    <div class="conteudo">
-        <div class="carrossel">
-            <?php foreach ($lista as $item) { ?>
-                <div class="item">
-                    <img src="<?php echo $item['imagem']; ?>" alt="Foto do produto">
-                    <h1><?php echo $item['nome']; ?></h1>
-                    <p><?php echo $item['descricao']; ?></p>
-                    <p><?php echo $item['valor']; ?></p>
-                </div>
-            <?php } ?>
-        </div>
+   
 </body>
 </html>
