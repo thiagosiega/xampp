@@ -1,27 +1,12 @@
 <?php
-session_start();
+//impede 2 sessões
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 
 if (isset($_SESSION['email'])) {
     include_once("Server/Server.php");
-
-    // Check if the user exists
-    $verificarUser = mysqli_prepare($conexao, "SELECT Nome, img FROM users WHERE email = ?");
-    mysqli_stmt_bind_param($verificarUser, "s", $_SESSION['email']);
-    mysqli_stmt_execute($verificarUser);
-    mysqli_stmt_store_result($verificarUser);
-
-    if (mysqli_stmt_num_rows($verificarUser) > 0) {
-        mysqli_stmt_bind_result($verificarUser, $Nome, $img);
-        mysqli_stmt_fetch($verificarUser);
-
-        // Adjust the image path if needed
-        $img = ($img != "img/Backgraund1.jpg") ? "Site/img_troca/".$img : $img;
-    } else {
-        // Redirect with error code if user doesn't exist
-        $erro = 4;
-        header("Location: Erros/Codigo_erro.php?msg=$erro");
-        exit();
-    }
+    include_once("Server/Verificar.php");
 }
 ?>
 
@@ -37,8 +22,8 @@ if (isset($_SESSION['email'])) {
     <?php if (isset($_SESSION['email'])): ?>
         <div class="autologin">
             <div class="circle">
-                <h1>Olá, <?php echo $Nome; ?></h1>
-                <img src="<?php echo $img; ?>" alt="Foto de perfil">
+                <h1>Olá, <?php echo $nome; ?></h1>
+                <img src="<?php echo "Site/$img"; ?>" alt="Foto de perfil">
                 <a href="Site/Home.php">Entrar</a>
                 <a href="Server/Logout.php">Sair</a>
             </div>

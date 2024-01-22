@@ -21,34 +21,11 @@ include_once '../Server/Verificar.php';
     <link type="text/css" rel="stylesheet" href="css/Perfil.css">
     <title>Home</title>
     <style>
-        .img_perfil{
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-radius: 15px;
-            margin-left: 20px;
-        }
-        .img_perfil_exibir{
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .img_perfil_exibir img{
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
+        <?php include_once 'css/Perfil.css'; ?>
     </style>
 </head>
 <body>
-    <div class="siderbar">
+    <div class="siderbar" id="mySidebar">
         <h1>Ola!<br><?php echo $nome?></h1> 
         <div class="imagem">  
             <img src="<?php echo $img?>" alt="perfil" class="perfil">

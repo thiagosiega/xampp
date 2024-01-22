@@ -1,4 +1,4 @@
-body{
+    body{
     background-image: url("../../img/Backgraund1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -13,7 +13,7 @@ body{
     height: 100%;
     top: -10px;
     left: -230px;
-    background-color: #912af150;
+    background-color: #912af136;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -75,15 +75,63 @@ body{
 }
 .siderbar:hover {
     left: 0px;
+    background-color: #912af1;
 }
+/* move a barra de pesquisa para o topo da pagina */
 
-.content {
+.pesquisa{
     width: 100%;
-    height: 100vh; 
-    margin-left: 30px;
-    transition: margin-left 0.3s ease-in-out;
+    height: 50px;
+    background-color: #912af1;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    
+}
+.pesquisa input[type="text"]{
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.pesquisa input[type="submit"]{
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    background-color: #ccc;
+    cursor: pointer;
+}
+.pesquisa input[type="submit"]:hover{
+    background-color: #bbb;
+}
+.pesquisa input[type="text"]:focus{
+    border: 1px solid #aaa;
+}
+.pesquisa input[type="submit"]:focus{
+    border: 1px solid #aaa;
 }
 
-.siderbar:hover + .content {
-    margin-left: 250px;
+.logo {
+    width: 100%;
+    height: 60px;
+    background-color: #ac15b9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s; /* Added transition for background-color */
+
+    > img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    > h1 {
+        color: #fff;
+        font-size: 24px;
+    }
 }

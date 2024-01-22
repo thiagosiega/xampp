@@ -17,7 +17,10 @@ include_once '../Server/Verificar.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link type="text/css" rel="stylesheet" href="css/Home.css">
+    <style> <?php include_once 'css/Home.css'; ?> 
+    
+
+    </style>
 </head>
 <body>
     <div class="siderbar">
@@ -30,6 +33,17 @@ include_once '../Server/Verificar.php';
             <a href="Perfil.php">Perfil</a>
             <a href="../Server/Logout.php">Sair</a>
         </div>  
+    </div>
+    <div class="top">
+        <div class="logo">
+            <img src="../img/baner_fofo.jpg" alt="Logo">
+        </div>
+        <div class="pesquisa">
+            <form action="Pesquisa.php" method="POST">
+                <input type="text" name="pesquisa" placeholder="Pesquisar">
+                <input type="submit" value="Pesquisar">
+            </form>
+        </div>
     </div>    
     <div class="content">
         <header>
