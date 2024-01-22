@@ -7,19 +7,7 @@ if(!isset($_SESSION['email'])){
 
 include_once '../Server/Server.php';
 //verifica se o email existe
-$email = $_SESSION['email'];
-$sql = "SELECT * FROM users WHERE email = '$email'";
-$result = mysqli_query($conexao, $sql);
-$row = mysqli_fetch_assoc($result);
-if (mysqli_num_rows($result) == 1) {
-    $nome = $row['Nome'];
-    $sobrenome = $row['Sobrenome'];
-    $email = $row['Email'];
-    $sexo = $row['Sexo'];
-    $data = $row['Data'];
-    $img = $row['img'];
-    //
-}
+include_once '../Server/Verificar.php';
 
 ?>
 
@@ -35,13 +23,7 @@ if (mysqli_num_rows($result) == 1) {
     <div class="siderbar">
         <h1>Ola!<br><?php echo $nome?></h1> 
         <div class="imagem">  
-            <?php
-                if($img == 1){
-                    echo "<img src='User/$email/$img' alt='perfil' class='perfil'>";
-                }else{
-                    echo "<img src='../img/Perfil/Padrao.jpg' alt='perfil' class='perfil'>";
-                }
-            ?> 
+            <img src="<?php echo $img?>" alt="Imagem de perfil">
         </div>
         <div class="atalhos">
             <a href="Home.php">Home</a>
@@ -52,6 +34,9 @@ if (mysqli_num_rows($result) == 1) {
     <div class="content">
         <header>
             <h1>Home</h1>
+            <?php 
+            echo "$img";
+            ?>
         </header>
     </div>
 </body>
