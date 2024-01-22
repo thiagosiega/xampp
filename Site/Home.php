@@ -34,9 +34,6 @@ include_once '../Server/Verificar.php';
     <div class="content">
         <header>
             <h1>Home</h1>
-            <?php 
-            echo "$img";
-            ?>
         </header>
     </div>
 </body>

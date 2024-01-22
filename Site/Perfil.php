@@ -20,6 +20,32 @@ include_once '../Server/Verificar.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="css/Perfil.css">
     <title>Home</title>
+    <style>
+        .img_perfil{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            margin-left: 20px;
+        }
+        .img_perfil_exibir{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .img_perfil_exibir img{
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+    </style>
 </head>
 <body>
     <div class="siderbar">
@@ -78,11 +104,8 @@ include_once '../Server/Verificar.php';
     <div class = "img_perfil">
         <h1>Imagem de Perfil</h1>
         <div class="imagem">  
-            <div class="img_perfil">
-                <?php
-                    echo $img;
-                    echo "<img src='$img' alt='perfil' class='perfil'>";
-                ?>
+            <div class="img_perfil_exibir">
+                <img src="<?php echo $img?>" alt="perfil" class="perfil">
             </div>
             <form action="troca_perfil.php" method="post" enctype="multipart/form-data">
                 <input type="file" name="img">
