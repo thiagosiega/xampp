@@ -24,12 +24,11 @@ if (mysqli_stmt_num_rows($verificar) > 0) {
         header("Location: Site/Home.php");
         exit();
     } else {
-        echo "<script>alert('Senha incorreta!');window.location.href='index.html';</script>";
+        echo "<script>alert('Senha incorreta!');window.location.href='index.php';</script>";
     }
 } else {
-    echo "<script>alert('Usuário não encontrado!');window.location.href='index.html';</script>";
+    echo "<script>alert('Usuário não encontrado!');window.location.href='index.php';</script>";
 }
 
-// Fechar a declaração preparada
 mysqli_stmt_close($verificar);
 ?>

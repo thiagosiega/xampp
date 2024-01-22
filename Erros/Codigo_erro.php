@@ -1,34 +1,18 @@
 <?php
 
-function redirecionarComErro($erro, $mensagemPadrao) {
-    $msg = $mensagemPadrao;
+$lista_erros = [
+    $erro = 1 => "Erro ao conectar com o banco de dados",
+    $erro = 2 => "Erro ao cadastrar",
+    $erro = 3 => "Opis, algo deu errado, parece que voce nao esta logado",
+    $erro = 4 => "Erro ao acessar pagina",
+    $erro = 5 => "Informaçoes invalidas",
+    $erro = 6 => "Erro ao alterar",
+    $erro = 7 => "Erro ao excluir",
+    $erro = 8 => "Opis essa pagina exige login",
+];
 
-    switch ($erro) {
-        case 1:
-            $msg = "Server desligado, tente novamente mais tarde.";
-            break;
-        case 2:
-            $msg = "Erro ao conectar ao banco de dados, tente novamente mais tarde.";
-            break;
-        case 3:
-            $msg = "Erro ao cadastrar, tente novamente mais tarde.";
-            break;
-        case 4:
-            $msg = "Opis! Você tentou acessar uma área de login!\nTente novamente mais tarde.";
-            break;
-    }
+$msg = $lista_erros[$erro];
 
-    header("Location: Erro.php?$msg");
-    exit();
-}
+header("Location: Erro.php?msg=$msg")
 
-echo "<script>alert('Erro!');</script>";
-echo $msg;
-
-// Verificar se $erro é nulo ou desconhecido
-if ($erro === null || !in_array($erro, [1, 2, 3, 4])) {
-    redirecionarComErro($erro, "Erro desconhecido, tente novamente mais tarde.");
-}
-
-redirecionarComErro($erro, "Erro desconhecido, tente novamente mais tarde! ok");
 ?>

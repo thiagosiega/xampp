@@ -17,7 +17,7 @@ mysqli_stmt_execute($verificar);
 mysqli_stmt_store_result($verificar);
 
 if(mysqli_stmt_num_rows($verificar) > 0){
-    echo "<script>alert('Email já cadastrado!');window.location.href='index.html';</script>";
+    echo "<script>alert('Email já cadastrado!');window.location.href='index.php';</script>";
 } else {
     $sql = "INSERT INTO users (Nome, Sobrenome, Email, Senha, Sexo, Data) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conexao, $sql);
@@ -25,12 +25,11 @@ if(mysqli_stmt_num_rows($verificar) > 0){
     $resultado = mysqli_stmt_execute($stmt);
     
     if($resultado){
-        header("Location: index.html");
+        header("Location: index.php");
         exit();
     } else {
-        // Registre os erros ou forneça uma mensagem de erro mais detalhada
         $erro = 3;
-        header("Location: Erros/Codigo_erro.php?$erro");
+        header("Location: Erro.php?msg=$erro");
         exit();
     }
 }

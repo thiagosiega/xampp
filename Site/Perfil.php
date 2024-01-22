@@ -1,248 +1,114 @@
-<?php
+<?php 
+
 session_start();
 if(!isset($_SESSION['email'])){
-    $erro = 4;
-    header("Location: ../Erros/Codigo_erro.php?$erro");
+    header('location:../index.php');
     exit();
 }
 
-include_once("../Server/Server.php");
-
-//verifica as informações do usuário
-$verificar = mysqli_prepare($conexao, "SELECT Nome FROM users WHERE email = ?");
-mysqli_stmt_bind_param($verificar, "s", $_SESSION['email']);
-mysqli_stmt_execute($verificar);
-mysqli_stmt_store_result($verificar);
-
-//se o usuário existir
-if (mysqli_stmt_num_rows($verificar) > 0) {
-    //usando o nome do usuário coleto as informações do mesmo
-    mysqli_stmt_bind_result($verificar, $Nome);
-    mysqli_stmt_fetch($verificar);
-    // coleto as informações do usuário Nome, Email, Senha, Data de nascimento, Sexo, img
-    $verificar = mysqli_prepare($conexao, "SELECT Nome, Email, Senha, Data, Sexo, img FROM users WHERE email = ?");
-    mysqli_stmt_bind_param($verificar, "s", $_SESSION['email']);
-    mysqli_stmt_execute($verificar);
-    mysqli_stmt_store_result($verificar);
-    mysqli_stmt_bind_result($verificar, $Nome, $Email, $Senha, $Data, $Sexo, $img);
-    mysqli_stmt_fetch($verificar);
-    if($img == "img/Fundo_padrao.jpg"){
-        $img = "../".$img;
-    }else{
-        $img = "img_troca/".$img;
-    }
-        
-} else {
-    $erro = 4;
-    header("Location: ../Erros/Codigo_erro.php?$erro");
-    exit();
+include_once '../Server/Server.php';
+//verifica se o email existe
+$email = $_SESSION['email'];
+$sql = "SELECT * FROM users WHERE email = '$email'";
+$result = mysqli_query($conexao, $sql);
+$row = mysqli_fetch_assoc($result);
+if (mysqli_num_rows($result) == 1) {
+    $nome = $row['Nome'];
+    $sobrenome = $row['Sobrenome'];
+    $email = $row['Email'];
+    $sexo = $row['Sexo'];
+    $data = $row['Data'];
+    $img = $row['img'];
+    //
 }
 
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="PT-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil: <?php echo $Nome; ?></title>
-    <style>
-        body{
-            transition: margin-left 0.5s ease-in-out; /* Adiciona uma transição suave para o corpo */
-            background-image: url("../img/Backgraund2.jpg");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            margin-left: 0;
-        }
-        .siderbar {
-            width: 300px;
-            height: 98%;
-            background-color: rgba(139, 60, 240, 1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px 0;
-            transition: left 0.5s ease-in-out;
-
-            >h1 {
-                font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-                font-size: 30px;
-                color: #fff;
-                margin-bottom: 20px;
-
-            }
-
-            >.img {
-                width: 150px;
-                height: 150px;
-                border-radius: 50%;
-                overflow: hidden;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-bottom: 20px;
-
-                >img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-            }
-            > .atalhos {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                > a {
-                    width: 100%;
-                    padding: 10px 0;
-                    text-align: center;
-                    color: #fff;
-                    font-size: 20px;
-                    text-decoration: none;
-                    border-bottom: 1px solid #fff;
-                    transition: 0.3s;
-                    &:hover {
-                        background-color: rgba(255, 0, 0, 0.2); /* Red hover color */
-                    }
-                    
-                }
-            }
-            
-        }     
-        .Esquerdo{
-            width: 200px;
-            height: 100%;
-            position: fixed;
-            margin-left: -10px;
-            margin-top: -10px;
-            background-color: rgba(114, 58, 179, 0.59);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            > h1 {
-                font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-                font-size: 15px;
-                color: #fff;
-            }
-        } 
-        .Direito{
-            width: 100%;
-            height: 100%;
-            position: fixed;
-            margin-left: 200px;
-            margin-top: -10px;
-            display: flex;
-            flex-direction: column;
-            align-items: laft;
-            > h1 {
-                font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-                font-size: 15px;
-                color: #fff;
-            }
-            > .img_perfil{
-                width: 100%;
-                height: 100%;
-                position: fixed;
-                margin-left: 200px;
-                margin-top: -10px;
-                display: flex;
-                flex-direction: column;
-                align-items: laft;
-                > h1 {
-                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-                    font-size: 15px;
-                    color: #fff;
-                }
-                
-            }
-        } 
-        .conteudo {
-            width: 100%;
-            height: 100%;
-            position: fixed;
-            margin-left: 300px;
-            margin-top: -10px;
-            display: flex;
-            flex-direction: column;
-            align-items: laft;
-            > h1 {
-                font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-                font-size: 15px;
-                color: #fff;
-            }
-        }                
-    </style>
+    <link type="text/css" rel="stylesheet" href="css/Perfil.css">
+    <title>Home</title>
 </head>
 <body>
     <div class="siderbar">
-        <h1>Perfil</h1>
-        <div class="img">
-            <img src="<?php echo $img; ?>" alt="Foto de perfil">
+        <h1>Ola!<br><?php echo $nome?></h1> 
+        <div class="imagem">  
+            <?php
+                if($img == 1){
+                    echo "<img src='User/$email/$img' alt='perfil' class='perfil'>";
+                }else{
+                    echo "<img src='../img/Perfil/Padrao.jpg' alt='perfil' class='perfil'>";
+                }
+            ?> 
         </div>
         <div class="atalhos">
-            <h1><?php echo $Nome; ?></h1>
             <a href="Home.php">Home</a>
-            <a href="#">Carrinho</a>
+            <a href="Perfil.php">Perfil</a>
             <a href="../Server/Logout.php">Sair</a>
+        </div>  
+    </div>
+    <div class="content">
+        <div class="tex_infor">
+            <h1>Informações</h1>
+            <div class="infor">
+                <div class="nome">
+                    <h2>Nome:</h2>
+                </div>
+                <div class="sobrenome">
+                    <h2>Sobrenome: </h2>
+                </div>
+                <div class="email">
+                    <h2>Email:</h2>
+                </div>
+                <div class="sexo">
+                    <h2>Sexo:</h2>
+                </div>
+                <div class="data">
+                    <h2>Data de Nascimento:</h2>
+                </div>
+            </div>
+        </div>
+        <div class="tex_infor2">
+            <br><br><br>
+            <div class="infor2">
+                <div class="nome">
+                    <h2><?php echo $nome?></h2>
+                </div>
+                <div class="sobrenome">
+                    <h2><?php echo $sobrenome?></h2>
+                </div>
+                <div class="email">
+                    <h2><?php echo $email?></h2>
+                </div>
+                <div class="sexo">
+                    <h2><?php echo $sexo?></h2>
+                </div>
+                <div class="data">
+                    <h2><?php echo $data?></h2>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <div class = "img_perfil">
+        <h1>Imagem de Perfil</h1>
+        <div class="imagem">  
+            <div class="img_perfil">
+                <?php
+                    if($img == 1){
+                        echo "<img src='User/$email/$img' alt='perfil' class='perfil'>";
+                    }else{
+                        echo "<img src='../img/Perfil/Padrao.jpg' alt='perfil' class='perfil'>";
+                    }
+                ?>
+            </div>
+            <form action="troca_perfil.php" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file">
+                <button type="submit" name="submit">Upload</button>
+            </form>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var sidebar = document.querySelector(".siderbar");
-            var body = document.body;
-            var conteudo = document.querySelector(".conteudo");
-
-            // Inicia ocultando o sidebar
-            sidebar.style.transition = "left 0.3s ease-in-out"; // Adiciona uma transição suave
-            conteudo.style.transition = "margin-left 0.5s ease-in-out"; // Adiciona uma transição suave
-
-            // Move a sidebar para fora da tela
-            sidebar.style.left = "-300px";
-            
-            function esconder(event) {
-                var sidebarWidth = sidebar.offsetWidth;
-
-                if (event.clientX < 20) {
-                    sidebar.style.left = "0";
-                    body.style.marginLeft = (sidebarWidth * 1) + "px";
-                    conteudo.style.marginLeft = (sidebarWidth * 0.8) - "px";
-                } else if (event.clientX > sidebarWidth + 20) {
-                    sidebar.style.left = "-300px";
-                    body.style.marginLeft = "0";
-                    conteudo.style.marginLeft = "0";
-                }
-            }
-
-            document.addEventListener('mousemove', esconder);
-        });
-    </script>
-    <div class="conteudo">
-        <div class="Esquerdo">
-            <h1>Nome: </h1>
-            <h1>Email: </h1>
-            <h1>Sexo: </h1>
-            <h1>Data de nascimento: </h1>
-        </div>
-        <div class="Direito">
-            <h1><?php echo $Nome; ?></h1>
-            <h1><?php echo $Email; ?></h1>
-            <h1><?php echo $Sexo; ?></h1>
-            <h1><?php echo $Data; ?></h1><br>
-            <div class = "img_perfil">
-                <form action="img_troca/img_user.php" method="POST" enctype="multipart/form-data">
-                    <label for="img">Escolha uma imagem de perfil:</label><br>
-                    <input type="file" name="img" id="img" accept="image/*"><br>
-                    <input type="submit" value="Enviar">
-                </form>
-            </div>
-        </div>    
-    </div>      
 </body>
 </html>
