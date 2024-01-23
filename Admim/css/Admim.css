@@ -1,0 +1,141 @@
+body {
+    margin-bottom: 60px; /* Deve ser pelo menos a altura da sua barra de navegação */
+}
+  
+
+.container {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Isso fará com que os filhos sejam alinhados em coluna */
+    align-items: center; /* Isso centraliza os itens no eixo transversal (neste caso, horizontal) */
+    justify-content: center; /* Isso centraliza os itens no eixo principal (neste caso, vertical) */
+    background-color: rgba(0, 0, 0, 0.363);
+    border-radius: 10px;
+}
+
+/* Path: Admim/css/Admim.css */
+/* Barras pretas */
+.Funcionarios,
+.Adicionar,
+.Produtos,
+.Remover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+}
+
+/* h1 */
+.Funcionarios h1,
+.Produtos h1,
+.Adicionar h1,
+.Remover h1 {
+    height: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: #3914db;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.Adicionar input,
+.Remover input {
+    width: 90%; /* ou algum outro tamanho conforme necessário */
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.Adicionar button,
+.Remover button {
+    width: 90%;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.Adicionar select{
+    width: 90%;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.Produtos table,
+.Funcionarios table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.Produtos th,
+.Funcionarios th,
+.Produtos td,
+.Funcionarios td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.Produtos th,
+.Funcionarios th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.Produtos tr:nth-child(even),
+.Funcionarios tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.error {
+    color: red;
+}
+
+/* Estilo para a barra de navegação no rodapé */
+.navbar-bottom {
+    position: fixed; /* Fixa a barra na parte inferior da janela */
+    bottom: 0; /* Alinha a barra na base da janela */
+    left: 0; /* Alinha a barra ao lado esquerdo da janela */
+    width: 100%; /* A barra deve ocupar 100% da largura da tela */
+    background-color: #1687b4; /* Cor de fundo da barra */
+    color: white; /* Cor do texto dentro da barra */
+    text-align: center; /* Centraliza o texto dentro de cada link */
+    padding: 10px 0; /* Espaçamento dentro da barra */
+    border-radius: 15px;
+    z-index: 1000; /* Garante que a barra esteja acima de outros elementos */
+}
+  
+.navbar-bottom a {
+    padding: 10px 15px; /* Espaçamento ao redor dos links */
+    text-decoration: none; /* Remove o sublinhado dos links */
+    color: rgb(9, 32, 20); /* Cor do texto dos links */
+    border-radius: 15px;
+    transition: background-color 0.3s; /* Efeito suave ao mudar a cor de fundo */
+}
+  
+.navbar-bottom a:hover {
+    background-color: #ddd; /* Cor de fundo dos links ao passar o mouse */
+    color: black; /* Cor do texto dos links ao passar o mouse */
+}
+  

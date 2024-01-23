@@ -7,6 +7,7 @@ $lista_produtos = [
         "descricao" => "Descrição do produto 1",
         "quantidade" => 10,
         "valor" => 10.00,
+        "imagem" => "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fbr%2Fvetor%2Fvetor-de-embalagem-de-caixa-de-papel-de-presente-gm1130005789-298759459&psig=AOvVaw0QZ3Z4Q4Z3Q8Q4Q4Q4Q4Q4&ust=1623686168212000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJjQ4ZqH0_ECFQAAAAAdAAAAABAD",
     ],
     [
         "id" => 2,
@@ -14,6 +15,7 @@ $lista_produtos = [
         "descricao" => "Descrição do produto 2",
         "quantidade" => 20,
         "valor" => 20.00,
+        "imagem" => "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fbr%2Fvetor%2Fvetor-de-embalagem-de-caixa-de-papel-de-presente-gm1130005789-298759459&psig=AOvVaw0QZ3Z4Q4Z3Q8Q4Q4Q4Q4Q4&ust=1623686168212000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJjQ4ZqH0_ECFQAAAAAdAAAAABAD",
     ],
     [
         "id" => 3,

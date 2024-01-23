@@ -21,6 +21,7 @@ if (mysqli_num_rows($result) == 1) {
     $img = $row['img'];
     $sexo = $row['Sexo'];
     $data = $row['Data'];
+    $id = $row['ID'];
     if ($img == "img/Backgraund1.jpg") {
         $img = "../$img";
     }else{

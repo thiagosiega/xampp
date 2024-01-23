@@ -34,6 +34,11 @@ include_once '../Server/Verificar.php';
             <a href="Home.php">Home</a>
             <a href="Perfil.php">Perfil</a>
             <a href="../Server/Logout.php">Sair</a>
+            <?php
+            if ($id == 3) {
+                echo "<a href='../Admim/Admim.php'>Admin</a>";
+            }
+            ?>
         </div>  
     </div>
     <div class="content">

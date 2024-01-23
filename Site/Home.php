@@ -17,9 +17,7 @@ include_once '../Server/Verificar.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <style> <?php include_once 'css/Home.css'; ?> 
-    
-
+    <style> <?php include_once 'css/Home.css'; ?>     
     </style>
 </head>
 <body>
