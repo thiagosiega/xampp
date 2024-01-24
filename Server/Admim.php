@@ -113,7 +113,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit3"])) {
     $nome_produto = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);
     $quantidade = filter_input(INPUT_POST, "quantidade", FILTER_SANITIZE_NUMBER_INT);
     $preco = filter_input(INPUT_POST, "preco", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+    $imagem = rand(100, 999) . date("dmYHis") . rand(100, 999) . ".jpg";
+    $file_img = "../Site/Estoque/Produtos/" . $imagem;
 
+    // Verifica se uma imagem foi enviada
+    if (isset($_FILES['imagem']['name']) && $_FILES['imagem']['error'] == 0) {
+        // Salva a imagem com o nome gerado
+        move_uploaded_file($_FILES['imagem']['tmp_name'], $file_img);
+    } else {
+        // Define um nome padrão caso nenhuma imagem seja enviada
+        $imagem = "SemImagem.jpg";
+    }
     // Verifica se o produto já está cadastrado
     $sql = "SELECT Nome FROM produtos WHERE Nome = ?";
     $stmt = mysqli_prepare($conexao, $sql);
@@ -127,18 +137,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit3"])) {
         echo "<script>alert('Produto já cadastrado!'); window.location.href='../Admim/Admim.php';</script>";
         exit();
     } else {
-        // Insere o produto no banco de dados
-        $sql = "INSERT INTO produtos (Nome, Quantidade, Preco) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO produtos (Nome, Quantidade, Preco, Img) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($conexao, $sql);
-        mysqli_stmt_bind_param($stmt, "sid", $nome_produto, $quantidade, $preco);
+        mysqli_stmt_bind_param($stmt, "sids", $nome_produto, $quantidade, $preco, $imagem);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         mysqli_close($conexao);
+
         echo "<script>alert('Produto adicionado com sucesso!'); window.location.href='../Admim/Admim.php';</script>";
         exit();
     }
-}
 
+}
 //remove o produto
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit4"])) {
     $ID_produto = filter_input(INPUT_POST, "ID", FILTER_SANITIZE_NUMBER_INT);
@@ -156,6 +166,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit4"])) {
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         mysqli_close($conexao);
+        
         header('Location: ../Admim/Admim.php'); // Redireciona após a remoção
     }
 }

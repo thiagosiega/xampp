@@ -44,6 +44,15 @@ body {
     margin-bottom: 10px;
 }
 
+.Adicionar input [type="file"]{
+    width: 90%; /* ou algum outro tamanho conforme necessário */
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
 .Adicionar input,
 .Remover input {
     width: 90%; /* ou algum outro tamanho conforme necessário */

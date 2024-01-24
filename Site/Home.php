@@ -46,6 +46,36 @@ include_once '../Server/Verificar.php';
     <div class="content">
         <header>
             <h1>Home</h1>
+            <?php
+            //le todas as informaçoes do banco de dados
+            $sql = "SELECT * FROM produtos";
+            $result = mysqli_query($conexao, $sql);
+            $resultCheck = mysqli_num_rows($result);
+            if ($resultCheck > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $id = $row['ID_produto'];
+                    $nome_produto = $row['Nome'];
+                    $quantidade = $row['Quantidade'];
+                    $preco = $row['Preco'];
+                    $img = $row['Img'];
+                    if($img == "SemImagem.jpg"){
+                        $img = "../img/SemImagem.jpg";
+                    }else{
+                        $img = "Estoque/Produtos/$img";
+                    }
+                    echo "<div class='produto'>";
+                    echo "<p>$img</p>";
+                    echo "<img src='$img' alt='Imagem do produto'>";
+                    echo "<h2>$nome_produto</h2>";
+                    echo "<p>Quantidade: $quantidade</p>";
+                    echo "<p>Preço: R$ $preco</p>";
+                    echo "<a href='../Site/Estoque/Comprar.php?id=$id'>Comprar</a>";
+                    echo "</div>";
+
+                }
+            }
+
+            ?>
         </header>
     </div>
 </body>

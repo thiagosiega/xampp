@@ -132,15 +132,17 @@ if ($id != 3) {
             ?>
 
         </div>
-        <div class="Adicionar" id="Adicionar_Produtos">
+        <div class="Adicionar" id="Adicionar_Produtos" >
             <h1>Adicionar</h1>
-            <form action="../Server/Admim.php" method="post" nome="Adicionar">
+            <form action="../Server/Admim.php" method="post" nome="Adicionar" enctype="multipart/form-data">
                 <p>Nome do Produto</p>
                 <input type="text" name="nome" placeholder="Nome">
                 <p>Preço do Produto</p>
                 <input type="text" name="preco" placeholder="Preço">
                 <p>Quantidade do Produto</p>
                 <input type="text" name="quantidade" placeholder="Quantidade">
+                <p>Imagem do Produto</p>
+                <input type="file" name="imagem" placeholder="Imagem">
                 <button type="submit" name="submit3">Adicionar</button>
             </form>
         </div>
@@ -160,6 +162,8 @@ if ($id != 3) {
         <a href="#Produtos" class="scroll-link">Taela de Produtos</a>
         <a href="#Adicionar_Produtos" class="scroll-link">Adicionar Produtos</a>
         <a href="#Remover_Produtos" class="scroll-link">Remover Produtos</a>
+        <a href="../Server/Logout.php">Sair</a>
+        <a href="../Site/Home.php">Home</a>
         <!-- Adicione mais links conforme necessário -->
     </div>
     <script>
