@@ -44,8 +44,9 @@ include_once '../Server/Verificar.php';
         </div>
     </div>    
     <div class="content">
-        <header>
-            <h1>Home</h1>
+    <header>
+        <h1>Home</h1>
+        <div class="carrossel-container">
             <?php
             //le todas as informaçoes do banco de dados
             $sql = "SELECT * FROM produtos";
@@ -53,30 +54,82 @@ include_once '../Server/Verificar.php';
             $resultCheck = mysqli_num_rows($result);
             if ($resultCheck > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $id = $row['ID_produto'];
-                    $nome_produto = $row['Nome'];
-                    $quantidade = $row['Quantidade'];
+                    $quantidade_exibir = 5;
+                    $nome = $row['Nome'];
                     $preco = $row['Preco'];
-                    $img = $row['Img'];
-                    if($img == "SemImagem.jpg"){
-                        $img = "../img/SemImagem.jpg";
-                    }else{
-                        $img = "Estoque/Produtos/$img";
+                    $imagem = $row['Img'];
+                    $quantidade = $row['Quantidade'];
+                    if ($imagem == "SemImagem.jpg") {
+                        $imagem = "../img/SemImagem.jpg";
+                    } else {
+                        $imagem = "Estoque/Produtos/" . $imagem;
                     }
-                    echo "<div class='produto'>";
-                    echo "<p>$img</p>";
-                    echo "<img src='$img' alt='Imagem do produto'>";
-                    echo "<h2>$nome_produto</h2>";
-                    echo "<p>Quantidade: $quantidade</p>";
-                    echo "<p>Preço: R$ $preco</p>";
-                    echo "<a href='../Site/Estoque/Comprar.php?id=$id'>Comprar</a>";
-                    echo "</div>";
 
+                    if ($quantidade > 0) {
+                        echo "<div class='produtos'>";
+                        echo "<img src='$imagem' alt='$imagem'>";
+                        echo "<div class='info'>";
+                        echo "<h2>$nome</h2>";
+                        echo "<p>R$ $preco</p>";
+                        echo "<p>Quantidade: $quantidade</p>";
+                        echo "<form action='../Site/Adicionar.php' method='POST'>";
+                        echo "<input type='hidden' name='nome' value='$nome'>";
+                        echo "<input type='hidden' name='preco' value='$preco'>";
+                        echo "<input type='hidden' name='imagem' value='$imagem'>";
+                        echo "<input type='hidden' name='quantidade' value='$quantidade'>";
+                        echo "<input type='number' name='quantidade_adicionar' min='1' max='$quantidade_exibir' value='1'>";
+                        echo "<input type='submit' name='submit' value='Adicionar'>";
+                        echo "</form>";
+                        echo "</div>"; // Fechando a div 'info'
+                        echo "</div>"; // Fechando a div 'produtos'
+                    }
                 }
             }
-
             ?>
-        </header>
-    </div>
+        </div>
+        <div class="Itens">
+            <h1>Itens</h1>
+            <div class="carrossel-total">
+                <?php
+                //le todas as informaçoes do banco de dados
+                $sql = "SELECT * FROM produtos";
+                $result = mysqli_query($conexao, $sql);
+                $resultCheck = mysqli_num_rows($result);
+                if ($resultCheck > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $nome = $row['Nome'];
+                        $preco = $row['Preco'];
+                        $imagem = $row['Img'];
+                        $quantidade = $row['Quantidade'];
+                        if ($imagem == "SemImagem.jpg") {
+                            $imagem = "../img/SemImagem.jpg";
+                        } else {
+                            $imagem = "Estoque/Produtos/" . $imagem;
+                        }
+                        echo "<div class='produtos'>";
+                        echo "<img src='$imagem' alt='$imagem'>";
+                        echo "<div class='info'>";
+                        echo "<h2>$nome</h2>";
+                        echo "<p>R$ $preco</p>";
+                        echo "<p>Quantidade: $quantidade</p>";
+                        echo "<form action='../Site/Adicionar.php' method='POST'>";
+                        echo "<input type='hidden' name='nome' value='$nome'>";
+                        echo "<input type='hidden' name='preco' value='$preco'>";
+                        echo "<input type='hidden' name='imagem' value='$imagem'>";
+                        echo "<input type='hidden' name='quantidade' value='$quantidade'>";
+                        echo "<input type='number' name='quantidade_adicionar' min='1' max='$quantidade_exibir' value='1'>";
+                        echo "<input type='submit' name='submit' id='btn' value='Adicionar'>";
+                        echo "</form>";
+                        echo "</div>"; 
+                        echo "</div>"; 
+                        
+                    }
+                }
+                ?>
+            </div>
+        </div>
+    </header>
+</div>
+
 </body>
 </html>

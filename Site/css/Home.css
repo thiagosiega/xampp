@@ -1,10 +1,10 @@
     body{
-    background-image: url("../../img/Backgraund1.jpg");
+    background-image: url("../img/Backgraund2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
-    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
 }
 
@@ -33,7 +33,7 @@
         width: 100px;
         height: 100px;
         border-radius: 50%;
-        background-color: #fff;
+        background-color: #ffffff00;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -77,8 +77,6 @@
     left: 0px;
     background-color: #912af1;
 }
-/* move a barra de pesquisa para o topo da pagina */
-
 .pesquisa{
     width: 100%;
     height: 50px;
@@ -86,33 +84,34 @@
     align-items: center;
     justify-content: center;
     display: flex;
+    > .pesquisa input[type="text"]{
+        width: 300px;
+        height: 30px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 5px;
+    }
+    > .pesquisa input[type="submit"]{
+        width: 100px;
+        height: 30px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 5px;
+        background-color: #ccc;
+        cursor: pointer;
+    }
+    > .pesquisa input[type="text"]:hover{
+        background-color: #bbb;
+    }
+    > .pesquisa input[type="submit"]:hover{
+        background-color: #bbb;
+    }
+    > .pesquisa input[type="text"]:focus{
+        border: 1px solid #aaa;
+    }
     
 }
-.pesquisa input[type="text"]{
-    width: 300px;
-    height: 30px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    padding: 5px;
-}
-.pesquisa input[type="submit"]{
-    width: 100px;
-    height: 30px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    padding: 5px;
-    background-color: #ccc;
-    cursor: pointer;
-}
-.pesquisa input[type="submit"]:hover{
-    background-color: #bbb;
-}
-.pesquisa input[type="text"]:focus{
-    border: 1px solid #aaa;
-}
-.pesquisa input[type="submit"]:focus{
-    border: 1px solid #aaa;
-}
+
 .logo {
     width: 100%;
     height: 60px;
@@ -134,12 +133,83 @@
         font-size: 24px;
     }
 }
+.content{
+    margin-left: 50px;
+}
 .content header .produtos{
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap;    
     justify-content: center;
     align-items: center;
+    width: auto;
+    height: auto;
+    background-color: aqua;
+    border-radius: 15px;
+    > img {
+        width: 200px;
+        height: 200px;
+        border-radius: 15px;
+        margin-right: 10px;
+    }
+    > p {
+        color: #15996d96;
+        font-size: 24px;
+    }
+    > a {
+        height: auto;
+        height: 50px;
+        color: #3e17c996;
+        font-size: 24px;
+        background-color: aqua;
+    }
+
+}
+.carrossel-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap; 
+    overflow-x: auto;
+    justify-content: flex-start; 
+    gap: 20px;
+    background-color: #72af2162;
+}
+
+.produtos {
+    flex: 0 0 auto; 
+    width: 300px; 
+    text-align: center; 
+    border: 1px solid #ddd; 
+    padding: 10px; 
+    display: flex;
+    flex-direction: column; 
+    > input [type="submit"]{
+        width: 100px;
+        height: 30px;
+        border-radius: 5px;
+        border: 1px solid #a71313;
+        padding: 5px;
+        background-color: #ccc;
+        cursor: pointer;
+    }
+}
+
+.produtos img {
+    max-width: 100%; 
+}
+
+.info {
+    margin-top: 10px; /* Espaçamento superior entre a imagem e as informações */
+}
+
+.carrossel-total{
     width: 100%;
     height: 100%;
-    background-color: aqua;
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    background-color: #72af2162;
+    
 }
+

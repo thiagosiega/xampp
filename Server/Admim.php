@@ -115,13 +115,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit3"])) {
     $preco = filter_input(INPUT_POST, "preco", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     $imagem = rand(100, 999) . date("dmYHis") . rand(100, 999) . ".jpg";
     $file_img = "../Site/Estoque/Produtos/" . $imagem;
-
-    // Verifica se uma imagem foi enviada
+    //aleatoriza o nome da imagem
     if (isset($_FILES['imagem']['name']) && $_FILES['imagem']['error'] == 0) {
-        // Salva a imagem com o nome gerado
-        move_uploaded_file($_FILES['imagem']['tmp_name'], $file_img);
+        $imagem = rand(100, 999) . date("dmYHis") . rand(100, 999) . ".jpg";
+        $file_img = "../Site/Estoque/Produtos/" . $imagem;
     } else {
-        // Define um nome padrão caso nenhuma imagem seja enviada
         $imagem = "SemImagem.jpg";
     }
     // Verifica se o produto já está cadastrado
@@ -137,13 +135,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit3"])) {
         echo "<script>alert('Produto já cadastrado!'); window.location.href='../Admim/Admim.php';</script>";
         exit();
     } else {
+        // verifica se o nome aleatorizado ja existe
+        while (file_exists($file_img)) {
+            $imagem = rand(100, 999) . date("dmYHis") . rand(100, 999) . ".jpg";
+            $file_img = "../Site/Estoque/Produtos/" . $imagem;
+        }
+        // Insere o produto no banco de dados com a variável $imagem
         $sql = "INSERT INTO produtos (Nome, Quantidade, Preco, Img) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($conexao, $sql);
         mysqli_stmt_bind_param($stmt, "sids", $nome_produto, $quantidade, $preco, $imagem);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         mysqli_close($conexao);
-
+        // Salva a imagem
+        move_uploaded_file($_FILES['imagem']['tmp_name'], $file_img);
         echo "<script>alert('Produto adicionado com sucesso!'); window.location.href='../Admim/Admim.php';</script>";
         exit();
     }
